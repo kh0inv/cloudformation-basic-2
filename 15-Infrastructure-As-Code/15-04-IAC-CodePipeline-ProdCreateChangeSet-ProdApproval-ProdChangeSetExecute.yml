@@ -12,7 +12,7 @@ Parameters:
     Default: iac0189
   Email:
     Description: Email address where CodePipeline sends pipeline notifications
-    Type: String 
+    Type: String
 
 
 Resources:
@@ -173,7 +173,7 @@ Resources:
                 Action:
                   - "iam:PassRole"
                 Resource:
-                  - Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/CloudFormationRole-${AWS::StackName}  
+                  - Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/CloudFormationRole-${AWS::StackName}
 
 
   CloudFormationRole:
@@ -392,7 +392,7 @@ Resources:
                 ProjectName: !Ref CodeBuildProject
               RunOrder: 1
         - Name: Stage
-          Actions:              
+          Actions:
             - Name: CreateStageCFNStack
               InputArtifacts:
                 - Name: CFNCodeBuildOutput
@@ -408,7 +408,7 @@ Resources:
                 RoleArn: !GetAtt [ CloudFormationRole, Arn ]
                 Capabilities: CAPABILITY_NAMED_IAM
                 StackName: !Sub Stage-${AWS::StackName}
-                TemplateConfiguration: CFNCodeBuildOutput::vpc-config.json                
+                TemplateConfiguration: CFNCodeBuildOutput::vpc-config.json
                 TemplatePath: CFNCodeBuildOutput::vpc.yml
               RunOrder: 1
         - Name: Production
@@ -429,7 +429,7 @@ Resources:
                 RoleArn: !GetAtt [ CloudFormationRole, Arn ]
                 Capabilities: CAPABILITY_NAMED_IAM
                 StackName: !Sub Prod-${AWS::StackName}
-                TemplateConfiguration: CFNCodeBuildOutput::vpc-config.json                
+                TemplateConfiguration: CFNCodeBuildOutput::vpc-config.json
                 TemplatePath: CFNCodeBuildOutput::vpc.yml
               RunOrder: 1
             - Name: ProdApproval
@@ -459,6 +459,5 @@ Resources:
       ArtifactStore:
         Type: S3
         Location:
-          Ref: ArtifactStoreS3Location              
+          Ref: ArtifactStoreS3Location
 
-              

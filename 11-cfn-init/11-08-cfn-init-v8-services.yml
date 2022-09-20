@@ -5,7 +5,7 @@ Parameters:
   KeyName:
     Type: AWS::EC2::KeyPair::KeyName
 
-Resources: 
+Resources:
   MySecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -16,7 +16,7 @@ Resources:
           ToPort: '22'
           CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
-          FromPort: '8080'          
+          FromPort: '8080'
           ToPort: '8080'
           CidrIp: 0.0.0.0/0
 
@@ -41,7 +41,7 @@ Resources:
                 - groupone
                 - grouptwo
               uid: "501"
-              homeDir: "/home"                  
+              homeDir: "/home"
           sources:
             /tmp: "https://s3.us-east-2.amazonaws.com/cfn-init-0189/cfn/demo1.zip"
           files:
@@ -61,27 +61,27 @@ Resources:
                 action=/opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource MyVMInstance --region ${AWS::Region}
               mode: "000400"
               owner: "root"
-              group: "root"                      
+              group: "root"
           commands:
             test1:
                command: "chmod 755 demo.war"
-               cwd: "/tmp"                            
+               cwd: "/tmp"
             test2:
                command: "sudo yum -y erase java-1.7.0-openjdk.x86_64"
-               cwd: "~"         
-            test3:               
+               cwd: "~"
+            test3:
               command: "rm -rf demo*"
               cwd: "/var/lib/tomcat8/webapps"
             test4:
-              command: "cp demo.war /var/lib/tomcat8/webapps"                                  
+              command: "cp demo.war /var/lib/tomcat8/webapps"
               cwd: "/tmp"
           services:
             sysvinit:
-              tomcat8: 
+              tomcat8:
                 enabled: "true"
                 ensureRunning: "true"
     Properties:
-      ImageId: ami-0cd3dfa4e37921605
+      ImageId: ami-04cdd58fedf5c192a
       InstanceType: t2.micro
       KeyName: !Ref KeyName
       SecurityGroups:

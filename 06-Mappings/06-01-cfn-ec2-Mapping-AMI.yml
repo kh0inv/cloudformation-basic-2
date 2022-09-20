@@ -8,9 +8,9 @@ Parameters:
 Mappings:
   MyRegionMap:
     us-east-2:
-      HVM64: ami-0cd3dfa4e37921605
+      HVM64: ami-04cdd58fedf5c192a
     us-west-1:
-      HVM64: ami-0ec6517f6edbf8044     
+      HVM64: ami-0ec6517f6edbf8044
 
 Resources:
   MyVMInstance:

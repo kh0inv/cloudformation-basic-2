@@ -66,7 +66,7 @@ Resources:
         Type: S3
         Location: !Ref ArtifactStoreS3Location
         Name: !Sub BuildRestAppCFN-${AWS::StackName}
-        Packaging: ZIP        
+        Packaging: ZIP
       Environment:
         Type: LINUX_CONTAINER
         ComputeType: BUILD_GENERAL1_SMALL
@@ -113,17 +113,17 @@ Resources:
 
   CodeDeployApplication:
     Type: AWS::CodeDeploy::Application
-    Properties: 
+    Properties:
       ApplicationName: !Sub RestApp-${AWS::StackName}
       ComputePlatform: Server
 
-  CodeDeployDeploymentGroup: 
+  CodeDeployDeploymentGroup:
     Type: AWS::CodeDeploy::DeploymentGroup
-    Properties: 
+    Properties:
       ApplicationName: !Ref CodeDeployApplication
-      Ec2TagFilters: 
+      Ec2TagFilters:
         - Key: Name
           Value: dev
           Type: "KEY_AND_VALUE"
-      ServiceRoleArn: !GetAtt [ CodeDeployServiceRole, Arn ]      
+      ServiceRoleArn: !GetAtt [ CodeDeployServiceRole, Arn ]
       DeploymentGroupName: !Sub DeploymentGroup-${AWS::StackName}

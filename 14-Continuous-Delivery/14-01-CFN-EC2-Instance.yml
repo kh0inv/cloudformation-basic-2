@@ -3,7 +3,7 @@ Description: EC2 Instance with Instance profile role to access S3 buckets
 
 Parameters:
   KeyName:
-    Description: Key name to SSH to VM's. 
+    Description: Key name to SSH to VM's.
     Type: AWS::EC2::KeyPair::KeyName
 
 Resources:
@@ -48,24 +48,24 @@ Resources:
           ToPort: '22'
           CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
-          FromPort: '8080'          
+          FromPort: '8080'
           ToPort: '8080'
           CidrIp: 0.0.0.0/0
- 
+
   MyStageVMInstance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0cd3dfa4e37921605
+      ImageId: ami-04cdd58fedf5c192a
       InstanceType: t2.micro
       KeyName: !Ref KeyName
       SecurityGroups:
         - !Ref MySecurityGroup
       IamInstanceProfile: !Ref MyInstanceProfile
       Tags:
-        - Key: Name        
+        - Key: Name
           Value: dev
-      UserData: 
-        Fn::Base64: |  
+      UserData:
+        Fn::Base64: |
           #!/bin/bash
           sudo yum update
           sudo yum install ruby
@@ -77,23 +77,23 @@ Resources:
           cd /home/ec2-user
           wget https://aws-codedeploy-us-east-2.s3.amazonaws.com/latest/install
           chmod +x ./install
-          sudo ./install auto      
+          sudo ./install auto
 
 
   MyProdVMInstance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0cd3dfa4e37921605
+      ImageId: ami-04cdd58fedf5c192a
       InstanceType: t2.micro
       KeyName: !Ref KeyName
       SecurityGroups:
         - !Ref MySecurityGroup
       IamInstanceProfile: !Ref MyInstanceProfile
       Tags:
-        - Key: Name        
+        - Key: Name
           Value: prod
-      UserData: 
-        Fn::Base64: |  
+      UserData:
+        Fn::Base64: |
           #!/bin/bash
           sudo yum update
           sudo yum install ruby
@@ -105,14 +105,14 @@ Resources:
           cd /home/ec2-user
           wget https://aws-codedeploy-us-east-2.s3.amazonaws.com/latest/install
           chmod +x ./install
-          sudo ./install auto      
+          sudo ./install auto
 
 
-      
+
 Outputs:
   StageAppURL:
     Description: Staging Application Access URL
-    Value: !Sub 'http://${MyStageVMInstance.PublicDnsName}:8080/ccdemo/hello'          
+    Value: !Sub 'http://${MyStageVMInstance.PublicDnsName}:8080/ccdemo/hello'
   ProdAppURL:
     Description: Prod Application Access URL
-    Value: !Sub 'http://${MyProdVMInstance.PublicDnsName}:8080/ccdemo/hello'              
+    Value: !Sub 'http://${MyProdVMInstance.PublicDnsName}:8080/ccdemo/hello'

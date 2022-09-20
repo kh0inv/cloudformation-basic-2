@@ -5,7 +5,7 @@ Parameters:
   KeyName:
     Type: AWS::EC2::KeyPair::KeyName
 
-Resources: 
+Resources:
   MySecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -16,7 +16,7 @@ Resources:
           ToPort: '22'
           CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
-          FromPort: '8080'          
+          FromPort: '8080'
           ToPort: '8080'
           CidrIp: 0.0.0.0/0
 
@@ -41,13 +41,13 @@ Resources:
                 - groupone
                 - grouptwo
               uid: "501"
-              homeDir: "/home"                
+              homeDir: "/home"
           sources:
           files:
           commands:
           services:
     Properties:
-      ImageId: ami-0cd3dfa4e37921605
+      ImageId: ami-04cdd58fedf5c192a
       InstanceType: t2.micro
       KeyName: !Ref KeyName
       SecurityGroups:

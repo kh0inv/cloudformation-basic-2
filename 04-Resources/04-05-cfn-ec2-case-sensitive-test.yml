@@ -5,7 +5,7 @@ Resources:
   DevEC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0cd3dfa4e37921605
+      ImageId: ami-04cdd58fedf5c192a
       InstanceType: t2.micro
       KeyName: cfn-key-1
       SecurityGroups:
@@ -27,9 +27,9 @@ Resources:
         - IpProtocol: tcp
           FromPort: '8081'
           ToPort: '8081'
-          CidrIP: 0.0.0.0/0          
+          CidrIP: 0.0.0.0/0
 
   MyElasticIP:
     Type: AWS::EC2::EIP
     Properties:
-      InstanceId: !Ref DevEC2Instance           
+      InstanceId: !Ref DevEC2Instance

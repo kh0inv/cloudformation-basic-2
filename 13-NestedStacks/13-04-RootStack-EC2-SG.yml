@@ -9,22 +9,22 @@ Parameters:
     Type: String
     Default: 10.0.0.0/16
     Description: VPC CIDR Tange
-      
+
   Subnet01Block:
     Type: String
     Default: 10.0.1.0/24
-    Description: CidrBlock for Subnet 01 within the VPC.    
+    Description: CidrBlock for Subnet 01 within the VPC.
 
 Resources:
 
   VPCStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://s3.us-east-2.amazonaws.com/nestedbucket0189/nestedstacks/13-01-NestedStack-VPC.yml 
-      Parameters:  
+      TemplateURL: https://s3.us-east-2.amazonaws.com/nestedbucket0189/nestedstacks/13-01-NestedStack-VPC.yml
+      Parameters:
         VpcBlock: !Ref VpcBlock
-        Subnet01Block: !Ref Subnet01Block 
-      TimeoutInMinutes: 5            
+        Subnet01Block: !Ref Subnet01Block
+      TimeoutInMinutes: 5
 
   SecurityGroupStack:
     Type: AWS::CloudFormation::Stack
@@ -32,7 +32,7 @@ Resources:
       TemplateURL: https://s3.us-east-2.amazonaws.com/nestedbucket0189/nestedstacks/13-03-NestedStack-SG.yml
       Parameters:
         VPCId: !GetAtt VPCStack.Outputs.VpcId
-      TimeoutInMinutes: 5        
+      TimeoutInMinutes: 5
 
   MyVMInstance:
     Type: AWS::EC2::Instance
@@ -46,7 +46,7 @@ Resources:
           SubnetId: !GetAtt VPCStack.Outputs.Subnet01Id
           GroupSet:
             - !GetAtt SecurityGroupStack.Outputs.DevSGGroupId
-      UserData: 
+      UserData:
         Fn::Base64: |
           #!/bin/bash
           sudo yum update
@@ -62,4 +62,4 @@ Resources:
 Outputs:
   AppURL:
     Description: Application URL to access
-    Value: !Sub 'http://${MyVMInstance.PublicDnsName}:8080/index.html'            
+    Value: !Sub 'http://${MyVMInstance.PublicDnsName}:8080/index.html'

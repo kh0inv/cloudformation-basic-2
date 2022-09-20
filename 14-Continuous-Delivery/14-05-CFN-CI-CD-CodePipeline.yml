@@ -11,11 +11,11 @@ Parameters:
     Type: String
     Description: Name of the S3 bucket to store CodePipeline artificat.
     Default: rest-apps
-  Email: 
+  Email:
     Type: String
     Description: Email address to send notifications
     Default: dkalyanreddy@gmail.com
-        
+
 
 Resources:
   CodeBuildRole:
@@ -117,30 +117,30 @@ Resources:
 
   CodeDeployApplication:
     Type: AWS::CodeDeploy::Application
-    Properties: 
+    Properties:
       ApplicationName: !Sub RestApp-${AWS::StackName}
       ComputePlatform: Server
 
-  CodeDeployDeploymentGroup: 
+  CodeDeployDeploymentGroup:
     Type: AWS::CodeDeploy::DeploymentGroup
-    Properties: 
+    Properties:
       ApplicationName: !Ref CodeDeployApplication
-      Ec2TagFilters: 
+      Ec2TagFilters:
         - Key: Name
           Value: dev
           Type: "KEY_AND_VALUE"
-      ServiceRoleArn: !GetAtt [ CodeDeployServiceRole, Arn ]      
+      ServiceRoleArn: !GetAtt [ CodeDeployServiceRole, Arn ]
       DeploymentGroupName: !Sub DeploymentGroup-${AWS::StackName}
 
-  ProdCodeDeployDeploymentGroup: 
+  ProdCodeDeployDeploymentGroup:
     Type: AWS::CodeDeploy::DeploymentGroup
-    Properties: 
+    Properties:
       ApplicationName: !Ref CodeDeployApplication
-      Ec2TagFilters: 
+      Ec2TagFilters:
         - Key: Name
           Value: prod
           Type: "KEY_AND_VALUE"
-      ServiceRoleArn: !GetAtt [ CodeDeployServiceRole, Arn ]      
+      ServiceRoleArn: !GetAtt [ CodeDeployServiceRole, Arn ]
       DeploymentGroupName: !Sub ProdDeploymentGroup-${AWS::StackName}
 
 
@@ -233,7 +233,7 @@ Resources:
               Configuration:
                 BranchName: master
                 RepositoryName: !Ref ApplicationRepoName
-              RunOrder: 1                                                                    
+              RunOrder: 1
         - Name: Build
           Actions:
             - Name: CodeBuild
@@ -248,7 +248,7 @@ Resources:
                 - Name: RestAppArtifact
               Configuration:
                 ProjectName: !Ref BuildRestAppCFNProject
-              RunOrder: 1                                                                
+              RunOrder: 1
         - Name: DeployToStaging
           Actions:
             - Name: CodeDeploy
@@ -262,9 +262,9 @@ Resources:
               Configuration:
                 ApplicationName: !Ref CodeDeployApplication
                 DeploymentGroupName: !Ref CodeDeployDeploymentGroup
-              RunOrder: 1                                                
+              RunOrder: 1
         #- Name: ProductionApproval
-        #- Name: DeployToProduction 
+        #- Name: DeployToProduction
       ArtifactStore:
         Type: S3
-        Location: !Ref  ArtifactStoreS3Location                      
+        Location: !Ref  ArtifactStoreS3Location

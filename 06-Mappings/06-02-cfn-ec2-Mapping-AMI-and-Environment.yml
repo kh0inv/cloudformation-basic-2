@@ -8,7 +8,7 @@ Parameters:
     Description: Select the environment
     Type: String
     Default: dev
-    AllowedValues: 
+    AllowedValues:
       - dev
       - prod
 
@@ -16,15 +16,15 @@ Parameters:
 Mappings:
   MyRegionMap:
     us-east-2:
-      HVM64: ami-0cd3dfa4e37921605
+      HVM64: ami-04cdd58fedf5c192a
     us-west-1:
-      HVM64: ami-0ec6517f6edbf8044     
+      HVM64: ami-0ec6517f6edbf8044
 
   MyEnvironmentMap:
     dev:
       instanceType: t2.micro
     prod:
-      instanceType: t2.small      
+      instanceType: t2.small
 
 Resources:
   MyVMInstance:

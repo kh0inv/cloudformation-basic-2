@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: Root Stack Template
 
 Parameters:
-  VPCId: 
+  VPCId:
     Description: Create security group in this respective VPC
     Type: AWS::EC2::VPC::Id
 
@@ -24,7 +24,7 @@ Resources:
         - IpProtocol: tcp
           FromPort: '9080'
           ToPort: '9080'
-          CidrIp: 0.0.0.0/0          
+          CidrIp: 0.0.0.0/0
       VpcId: !Ref VPCId
 
 Outputs:

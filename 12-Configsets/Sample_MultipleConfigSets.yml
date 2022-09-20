@@ -7,5 +7,5 @@
           DualAppCS:
             - ConfigSet: "SingleAppCS"
             - App2
-          default: 
-            - ConfigSet: "DualAppCS"            
+          default:
+            - ConfigSet: "DualAppCS"

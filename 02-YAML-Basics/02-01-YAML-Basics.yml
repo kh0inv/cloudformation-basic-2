@@ -14,7 +14,7 @@ PoliceCases: null
 Persons:
   - Dave
   - John
-  - Mike  
+  - Mike
 Persons: [Dave, John, Mike]
 
 #YAML Dictionary
@@ -60,7 +60,7 @@ Persons:
       Occupation: Carpenter
       State: Texas
       Degrees:
-       - Masters  
+       - Masters
 
 #YAML Pipe
 Dave:
@@ -85,9 +85,9 @@ Dave:
   male: true
   AboutMe: >
     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Curabitur tellus mi, consectetur id lorem nec, molestie 
-    malesuada tellus. 
-    Etiam lacinia nisi non consequat sodales. 
-    Integer nec mauris in quam fringilla pharetra et ac tortor. 
+    Curabitur tellus mi, consectetur id lorem nec, molestie
+    malesuada tellus.
+    Etiam lacinia nisi non consequat sodales.
+    Integer nec mauris in quam fringilla pharetra et ac tortor.
     Duis odio odio, sodales vel consequat ut, sollicitudin.
 

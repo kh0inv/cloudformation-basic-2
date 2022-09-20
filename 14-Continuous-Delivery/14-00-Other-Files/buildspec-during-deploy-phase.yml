@@ -21,6 +21,6 @@ artifacts:
     - 'target/ccdemo.war'
     - 'appspec.yml'
     - 'scripts/before_install.sh'
-    - 'scripts/after_install.sh'    
+    - 'scripts/after_install.sh'
     - 'scripts/start_server.sh'
     - 'scripts/stop_server.sh'

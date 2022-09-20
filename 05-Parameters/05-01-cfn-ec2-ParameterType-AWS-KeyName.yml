@@ -6,19 +6,20 @@ Parameters:
     Description: Select the key name from the list
     Type: AWS::EC2::KeyPair::KeyName
 
-Resources: 
-  DevEC2Instance: 
+Resources:
+  DevEC2Instance:
     Type: 'AWS::EC2::Instance'
-    Properties: 
-      ImageId: ami-0cd3dfa4e37921605
+    Properties:
+      ImageId: ami-04cdd58fedf5c192a
       InstanceType: t2.micro
       KeyName: !Ref MyKeyName
       SecurityGroups:
-        - default        
-        - !Ref SSHSecurityGroup 
+        - default
+        - !Ref SSHSecurityGroup
+
   SSHSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
-    Properties: 
+    Properties:
       GroupDescription: my new SSH security group
       SecurityGroupIngress:
         - IpProtocol: tcp

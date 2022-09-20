@@ -12,7 +12,7 @@ Parameters:
     Default: rest-apps
   Email:
     Description: Email address where CodePipeline sends pipeline notifications
-    Type: String 
+    Type: String
 
 Resources:
 
@@ -115,30 +115,30 @@ Resources:
 
   CodeDeployApplication:
     Type: AWS::CodeDeploy::Application
-    Properties: 
+    Properties:
       ApplicationName: !Sub RestApp-${AWS::StackName}
       ComputePlatform: Server
 
-  CodeDeployDeploymentGroup: 
+  CodeDeployDeploymentGroup:
     Type: AWS::CodeDeploy::DeploymentGroup
-    Properties: 
+    Properties:
       ApplicationName: !Ref CodeDeployApplication
-      Ec2TagFilters: 
+      Ec2TagFilters:
         - Key: Name
           Value: dev
           Type: "KEY_AND_VALUE"
-      ServiceRoleArn: !GetAtt [ CodeDeployServiceRole, Arn ]      
+      ServiceRoleArn: !GetAtt [ CodeDeployServiceRole, Arn ]
       DeploymentGroupName: !Sub DeploymentGroup-${AWS::StackName}
 
-  ProdCodeDeployDeploymentGroup: 
+  ProdCodeDeployDeploymentGroup:
     Type: AWS::CodeDeploy::DeploymentGroup
-    Properties: 
+    Properties:
       ApplicationName: !Ref CodeDeployApplication
-      Ec2TagFilters: 
+      Ec2TagFilters:
         - Key: Name
           Value: prod
           Type: "KEY_AND_VALUE"
-      ServiceRoleArn: !GetAtt [ CodeDeployServiceRole, Arn ]      
+      ServiceRoleArn: !GetAtt [ CodeDeployServiceRole, Arn ]
       DeploymentGroupName: !Sub ProdCodeDeployDeploymentGroup-${AWS::StackName}
 
 

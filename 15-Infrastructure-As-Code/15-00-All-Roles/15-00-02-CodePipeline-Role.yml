@@ -65,4 +65,4 @@ Resources:
                 Action:
                   - "iam:PassRole"
                 Resource:
-                  - Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/CloudFormationRole-${AWS::StackName}  
+                  - Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/CloudFormationRole-${AWS::StackName}

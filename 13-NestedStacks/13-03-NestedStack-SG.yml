@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: Root Stack Template
 
 Parameters:
-  VPCId: 
+  VPCId:
     Description: Create security group in this respective VPC
     Type: AWS::EC2::VPC::Id
 
@@ -26,4 +26,4 @@ Resources:
 Outputs:
   DevSGGroupId:
     Description: Dev Security Group
-    Value: !Ref DevSecurityGroup                   
+    Value: !Ref DevSecurityGroup
